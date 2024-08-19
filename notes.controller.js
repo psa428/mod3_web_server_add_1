@@ -25,8 +25,6 @@ async function getNotes() {
 };
 
 async function removeNote(id) {
-    console.log(id);
-    
     
     const notes = await getNotes();
 
@@ -39,6 +37,15 @@ async function removeNote(id) {
 // Test
 // removeNote(1723624998791);
 
+async function editNote(id, title) {
+    const notes = await getNotes();
+    let  idx = notes.findIndex(note => note.id == id);
+    if (idx > -1){
+        notes[idx].title = title;
+        await fs.writeFile(notesPath, JSON.stringify(notes));
+    };
+};
+
 module.exports = {
-    addNote, getNotes, removeNote
+    addNote, getNotes, removeNote, editNote
 }

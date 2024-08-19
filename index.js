@@ -1,6 +1,6 @@
 const yargs = require('yargs');
 const pkg = require('./package.json');
-const {addNote, getNotes, removeNote} = require('./notes.controller');
+const {addNote, getNotes, removeNote, editNote} = require('./notes.controller');
 const { demandOption } = require('yargs');
 
 yargs.command({
@@ -34,6 +34,14 @@ yargs.command({
     describe:   'Remove note by id',
     handler({id}) {
         removeNote(id);      
+    }
+})
+
+yargs.command({
+    command: 'edit',
+    describe:   'Edit note by id',
+    handler({id, title}) {
+        editNote(id, title);      
     }
 })
 
